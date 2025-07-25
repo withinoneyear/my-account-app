@@ -6,6 +6,8 @@ import {
   UserUpdateData,
 } from "../database";
 import { authenticateToken, AuthRequest } from "../middleware/auth";
+import { isSessionValid } from "../services/sensitiveSession";
+import { stripSensitiveData } from "../services/userService";
 
 const router = express.Router();
 
@@ -26,6 +28,10 @@ router.get("/me", authenticateToken, async (req: AuthRequest, res: Response) => 
 
     if (!user) {
       return res.status(404).json({ error: "User not found" });
+    }
+
+    if (!isSessionValid(req.userId!)) {
+      stripSensitiveData(user);
     }
 
     res.json(user);
@@ -62,6 +68,10 @@ router.put("/me", authenticateToken, async (req: AuthRequest, res: Response) => 
       }
     });
 
+    if (!isSessionValid(req.userId!)) {
+      stripSensitiveData(updateData);
+    }
+
     if (Object.keys(updateData).length === 0) {
       return res.status(400).json({ error: "No valid fields to update" });
     }
@@ -70,6 +80,10 @@ router.put("/me", authenticateToken, async (req: AuthRequest, res: Response) => 
 
     if (!updatedUser) {
       return res.status(404).json({ error: "User not found" });
+    }
+
+    if (!isSessionValid(req.userId!)) {
+      stripSensitiveData(updatedUser);
     }
 
     res.json(updatedUser);

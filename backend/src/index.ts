@@ -4,6 +4,7 @@ import cors from "cors";
 import { initializeDatabase } from "./database";
 import userRoutes from "./routes/users";
 import authRoutes from "./routes/auth";
+import verifyRoutes from "./routes/verification";
 
 // Load environment variables
 dotenv.config();
@@ -20,6 +21,8 @@ initializeDatabase();
 
 app.use("/api/auth", authRoutes);
 app.use("/api/users", userRoutes);
+
+app.use("/api/verify", verifyRoutes);
 
 app.get("/health", (_req, res) => {
   res.json({ status: "OK", timestamp: new Date().toISOString() });
