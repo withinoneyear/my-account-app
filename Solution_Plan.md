@@ -18,8 +18,8 @@
 # Api
 
 ## Endpoints
-- POST /api/verify  - create verification code and send email
-- POST /api/sensitive-token - verify code 
+- GET /api/verify  - get verification code and send email
+- POST /api/verify - verify code
 ---
 - GET /api/me/sensitive - get sensitive user data
 - PUT /api/me/sensitive - update sensitive user data
