@@ -275,3 +275,13 @@ body {
     width: 100%;
   }
 }
+
+.lock {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 50px;
+  background-color: lightgray;
+  margin-bottom: 20px;
+  cursor: pointer;
+}

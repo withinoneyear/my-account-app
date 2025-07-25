@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { withSenstive } from "../hooks/withSensitive";
 
 
 
@@ -132,4 +133,4 @@ const BankingSection: React.FC<any> = ({ user, onSave }) => {
   );
 };
 
-export default BankingSection;
+export default withSenstive(BankingSection);

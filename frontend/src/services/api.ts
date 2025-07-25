@@ -1,6 +1,7 @@
 
 const API_BASE_URL = process.env.REACT_APP_API_BASE_URL || "http://localhost:3001/api";
 
+
 function getAuthToken(): string | null {
   return localStorage.getItem("auth_token");
 }
@@ -36,6 +37,30 @@ export const apiService = {
     localStorage.setItem("auth_token", data.token);
     return data;
   },
+
+  async getVerificationCode() {
+    const response = await fetch(`${API_BASE_URL}/verify`, {
+      method: "GET",
+      headers: getAuthHeaders(),
+    });
+    if (!response.ok) {
+      throw new Error("Failed to fetch verification code");
+    }
+    return response.json();
+  },
+
+  async verifyCode(code: string) {
+    const response = await fetch(`${API_BASE_URL}/verify`, {
+      method: "POST",
+      headers: getAuthHeaders(),
+      body: JSON.stringify({ code }),
+    });
+    if (!response.ok) {
+      throw new Error("Failed to verify code");
+    }
+    return true;
+  },
+
 
   async getCurrentUser() {
     const response = await fetch(`${API_BASE_URL}/users/me`, {

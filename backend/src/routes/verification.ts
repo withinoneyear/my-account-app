@@ -6,7 +6,8 @@ const router = express.Router();
 
 router.get("/", authenticateToken, async (req: AuthRequest, res: Response) => {
   try {
-    const session = create(req.userId!)
+    const session = create(req.userId!);
+    console.log("Verification code: ", session.code);
     res.json({ code: session.code });
   } catch (error) {
     // eslint-disable-next-line no-console
@@ -23,7 +24,7 @@ router.post("/", authenticateToken, async (req: AuthRequest, res: Response) => {
       return res.status(403).json({ error: "Not allowed!" });
     }
     
-    res.status(200);
+    return res.sendStatus(200);
   } catch (error) {
     // eslint-disable-next-line no-console
     console.error("Error verifying code:", error);

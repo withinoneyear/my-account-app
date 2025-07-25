@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { withSenstive } from "../hooks/withSensitive";
 
 
 const ContactSection: React.FC<any> = ({ user, onSave }) => {
@@ -97,4 +98,4 @@ const ContactSection: React.FC<any> = ({ user, onSave }) => {
   );
 };
 
-export default ContactSection;
+export default withSenstive(ContactSection);
