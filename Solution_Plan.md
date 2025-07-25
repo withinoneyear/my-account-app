@@ -4,8 +4,8 @@
 1. user clicks to unlock
 2. frontend calls api to send verification code
 3. user enters verification code
-4. frontend sends verification code to backend
-5. frontend calls api to get sensitive data with the token
+4. frontend sends verification code to backend 
+5. frontend calls api to get sensitive data 
 6. sensitive ui is rendered with the data returned
 7. frontend shows error and lock if api call fails
 
@@ -23,6 +23,7 @@
 ---
 - GET /api/me/sensitive - get sensitive user data
 - PUT /api/me/sensitive - update sensitive user data
+(Sensitive Apis can potentially use a different access token)
 
 # Code Verification
 For sake of similicity, [userId, code, expiry, attemps, lockedUntil] will be saved into cache
